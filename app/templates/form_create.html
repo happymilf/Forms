@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block subtitle %}Create{% endblock subtitle %}
+
+
+{% block main %}
+<div class="container" id="field-creator">
+    <a href="{{ url_for('index')}}">
+        <div class="container-item" id="button">
+            <p>Home</p>
+        </div>
+    </a>
+
+    <div class="container-item">
+        <p><b>Form Name</b> <input type="text" id="form-name" class="form-input"></p>
+    </div>
+
+    <div class="container-item">
+
+        <p><b>Field name</b><input type="text" id="field-name" class="form-input"></p>
+
+        <p>
+            <b>Field type</b>
+            <select id="field-type" class="form-input">
+                <option>Email</option>
+                <option>Phone</option>
+                <option>Date</option>
+                <option>Datetime</option>
+                <option>Text</option>
+            </select>
+        </p>
+
+    </div>
+    <div class="container-item">
+        <button id="add-button" onclick="add_to_form();">Add</button>
+    </div>
+    <div class="container-item">
+        <button id="add-button" onclick="save();">Save</button>
+    </div>
+
+    <div class="container-item" id="form-canvas">
+        <form action="">
+            
+        </form>
+    </div>
+
+
+
+
+    <script>
+        var fields_array = new Array();
+        
+        var fields_html = {
+            "text" : "<div><p><b>@</b></p></div><div><p><input type=\"text\" class=\"form-input\"></p></div>",
+            "phone" : "<div><p><b>@</b></p></div><div><p><input type=\"tel\" class=\"form-input\"></p></div>",
+            "date" : "<div><p><b>@</b></p></div><div><p><input type=\"date\" class=\"form-input\"></p></div>",
+            "datetime" : "<div><p><b>@</b></p></div><div><p><input type=\"datetime-local\" class=\"form-input\"></p></div>",
+            "email" : "<div><p><b>@</b></p></div><div><p><input type=\"email\" class=\"form-input\"></p></div>",
+        }
+
+
+        function add_to_form(){
+            var field = new Object();
+
+            var field_name = document.getElementById("field-name");
+            var field_type = document.getElementById("field-type");
+
+            if(field_name.value != null && field_type.value != null){
+                var s = "";
+                
+                field[field_name.value] = field_type.value.toLowerCase();
+                fields_array.push(field);
+                
+
+
+                var form_canvas = document.getElementById("form-canvas");
+                
+                        
+                form_canvas.innerHTML += "<div class=\"input-row\">" + fields_html[field_type.value.toLowerCase()].replace("@", field_name.value) + "</div>";
+                
+            }
+            
+
+        }   
+
+      
+        function save(){
+            var form_name = document.getElementById("form-name");
+
+            if(fields_array.length > 0 && form_name.value != ""){
+                var compiled_data = {
+                    "name" : form_name.value
+                }
+                for(var i = 0; i < fields_array.length; i++){
+                    compiled_data[Object.keys(fields_array[i])[0]] = fields_array[i][Object.keys(fields_array[i])[0]];
+                }
+                alert(JSON.stringify(compiled_data));
+
+                var url = document.location.host;
+                var xhr = new XMLHttpRequest();
+                alert(url);
+                xhr.open("POST", "/form/save", true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.send(JSON.stringify(
+                    compiled_data
+                ));
+                
+            }
+
+            
+        }
+
+    </script>
+</div>
+{% endblock main %}

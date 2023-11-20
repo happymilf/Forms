@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block subtitle %}Home{% endblock subtitle %}
+
+
+{% block main %}
+<div class="container">
+
+    <a href="{{url_for('form_create')}}">
+        <div class="container-item" id="button">
+            <b><p>Create form</p></b>
+        </div>
+    </a>
+
+    <div class="container-item">
+        <p><b>Find form by name</b> <input type="text" id="form-name"> <input type="button" value="OK" onclick="find_by_name();"></p>
+    </div>
+
+    <div class="container-item">
+        <p><b>Find form by id</b> <input type="number"  id="form-id"> <input type="button" value="OK" onclick="find_by_id();"></p>
+    </div>
+    
+</div>
+<br>
+<div class="container" id="loaded-form">
+    <div class="container-item">
+        <h3>Loaded Form</h3>
+    </div>
+    <div class="container" style="display : none;"></div>
+
+    <script>
+        function find_by_id(){
+            var form_id = document.getElementById("form-id");
+            var form_html = ""
+            var xhr = new XMLHttpRequest();
+
+            xhr.open("POST", "/form/save", true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify(
+                compiled_data
+            ));
+            if (form_id)
+            {
+                    fetch(
+                    "/form/html",
+                        {
+                            body : JSON.stringify(
+                                { "form_id" : form_id}
+                            )
+                        }
+                ).then(
+                    result =>{
+                        form_html = result;
+                        alert(form_html);
+                    }
+                ).catch(
+                    err => {
+                        console.log(err);
+                    }
+                );
+            }
+            
+
+        }
+        function find_by_name(){
+            var form_name = document.getElementById("form-name");
+            var form_html = ""
+            var xhr = new XMLHttpRequest();
+
+            xhr.open("POST", "/form/save", true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify(
+                compiled_data
+            ));
+            if (form_id)
+            {
+                    fetch(
+                    "/form/html",
+                        {
+                            body : JSON.stringify(
+                                { "form_name" : form_name}
+                            )
+                        }
+                ).then(
+                    result =>{
+                        form_html = result;
+                        alert(form_html);
+                    }
+                ).catch(
+                    err => {
+                        console.log(err);
+                    }
+                );
+            }
+        }
+    </script>
+
+</div>
+{% endblock main %}

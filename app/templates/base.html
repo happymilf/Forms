@@ -1,0 +1,23 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ url_for('static', path='/css/style.css') }}" rel="stylesheet">
+    <title>Forms Creator {% block subtitle %}{% endblock subtitle %}</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+
+        </header>
+        <main>
+            {% block main %}
+            {% endblock main %}
+        </main>
+        <footer>
+
+        </footer>
+    </div>
+    <script src="{{ url_for('static', path='scripts/htmx.min.js')}}"></script>
+</body>
+</html>

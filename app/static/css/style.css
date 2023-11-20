@@ -1,0 +1,104 @@
+
+body{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100%;
+    width: 100%;
+}
+
+header{
+
+}
+footer{
+
+}
+
+.wrapper{
+    min-width: 100vh;
+    display: grid;
+    grid-template-rows: 100px 1fr auto;
+    justify-content: center;
+    align-content: center;
+}
+
+.container{
+    box-shadow: 10px 13px 15px -5px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 10px 13px 15px -5px rgba(0,0,0,0.5);
+    -moz-box-shadow: 10px 13px 15px -5px rgba(0,0,0,0.5);
+
+    border-radius: 8px 8px 8px 8px;
+    -webkit-border-radius: 8px 8px 8px 8px;
+    -moz-border-radius: 8px 8px 8px 8px;
+
+    border: 2px solid #000000;
+
+    width: fit-content;
+
+    display: grid;
+    grid-auto-flow: row;
+
+    justify-content: center;
+    justify-items: center;
+
+    align-content: center;
+}
+div#loaded-form{
+    width: 100%;
+}
+.container-item{
+    padding: 3px;
+}
+
+
+div#button{
+    border: 1px solid #000000;
+    border-radius: 5px;
+    background-color: aquamarine;
+}
+div#button:hover{
+    border: 1px solid #000000;
+    border-radius: 5px;
+    background-color:cadetblue;
+}
+a {
+    all: unset;
+}
+
+
+
+
+.form-input{
+    padding: 3px;
+    margin: 3px;
+}
+
+input#field-name{
+    padding: 3px;
+}
+
+input#field-type{
+    padding: 3px;
+}
+
+
+#form-canvas{
+    display: grid;
+    grid-auto-flow: row;
+
+    width: 100%;
+    justify-content: center;
+
+    height: min-content;
+}
+
+.input-row{
+    display: grid;
+    grid-auto-flow: column;
+
+    align-content: center;
+    align-items: center;
+
+    width: 100%;
+}
