@@ -21,7 +21,7 @@ database : DataBase = DataBase(db_name="database")
 
 
 w_app : FastAPI = FastAPI()
-w_app.mount("/static", StaticFiles(directory=f"static"), name="static")
+w_app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
 templates = Jinja2Templates(directory=str(Path(BASE_DIR, 'templates')))
@@ -42,7 +42,6 @@ async def get_form(request : Request):
 
     result_name : str = ""
     result_json : dict[str, str] = {}
-    #database.search(search_pattern)
     
     result_name = database.search(search_pattern)
     print(result_name)
@@ -73,7 +72,7 @@ async def form_save(request : Request):
     print(form_json)
     
 
-
+#NOT COMPLITED
 @w_app.get("/form/html", response_class=HTMLResponse)
 async def get_html_form(request : Request):
     request_json : dict[str, str] = json.loads((await request.body()))
